@@ -41,7 +41,7 @@
 
         $scope.add = function (collection) {
             collection.id = ~~(Math.random() * 100);
-            $scope.persons.push(collection);
+            $scope.persons.push(angular.copy(collection));
             $scope.new = {};
         }
 
