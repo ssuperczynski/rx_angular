@@ -5,15 +5,18 @@
         .module('rx')
         .controller('DashboardCtrl', DashboardCtrl);
 
-    DashboardCtrl.$inject = ['$scope', 'DashboardFactory'];
+    DashboardCtrl.$inject = ['$scope', 'DashboardFactory', '$firebaseArray', '$rootScope'];
 
-    function DashboardCtrl($scope, DashboardFactory) {
+    function DashboardCtrl($scope, DashboardFactory, $firebaseArray, $rootScope) {
+
+        var ref = new Firebase("https://blinding-torch-9850.firebaseio.com");
+
+        $scope.persons = $firebaseArray(ref);
 
         $scope.selected = [];
         $scope.showSelected = false;
         $scope.showEdit = false;
         $scope.saved = false;
-        $scope.persons = DashboardFactory.json;
 
         $scope.show = function (index) {
             $scope.showSelected = true;
@@ -41,8 +44,9 @@
 
         $scope.add = function (collection) {
             collection.id = ~~(Math.random() * 100);
-            $scope.persons.push(angular.copy(collection));
+            $scope.persons.$add(angular.copy(collection));
             $scope.new = {};
+            $rootScope.$broadcast('user-added', [1, 2]);
         }
 
 
