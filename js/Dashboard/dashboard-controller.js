@@ -5,11 +5,11 @@
         .module('rx')
         .controller('DashboardCtrl', DashboardCtrl);
 
-    DashboardCtrl.$inject = ['$scope'];
+    DashboardCtrl.$inject = ['$scope', 'DashboardFactory'];
 
-    function DashboardCtrl($scope) {
+    function DashboardCtrl($scope, DashboardFactory) {
 
-
+        $scope.tasks = DashboardFactory.json;
 
     }
 
