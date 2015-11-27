@@ -9,12 +9,10 @@
 
     function DashboardFactory($http) {
 
-        function save(params) {
-            return $http.post('http://httpbin.org/post', params);
-        }
+        var json = [];
 
         return {
-            save: save
+            json: json
         }
     }
 
